@@ -1,0 +1,221 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using HttpUtils;
+
+
+public enum HttpVerb
+{
+    GET,
+    POST,
+    PUT,
+    DELETE
+}
+
+namespace HttpUtils
+{
+    public class RestClient
+    {
+        public string EndPoint { get; set; }
+        public HttpVerb Method { get; set; }
+        public string ContentType { get; set; }
+        public string PostData { get; set; }
+
+        public RestClient()
+        {
+            //EndPoint = "https://api-test.greenwaymedical.com/Integration/RESTv1.0/PrimeSuiteAPIService/Patient/ClinicalSummaryGet?api_key=gxzzfraga2uunq2mj6s79zdx";
+            EndPoint = "https://api-test.greenwaymedical.com/Integration/RESTv1.0/PrimeSuiteAPIService/Document/DocumentImportChart?api_key=gxzzfraga2uunq2mj6s79zdx";
+            Method = HttpVerb.GET;
+            ContentType = "text/xml";
+            PostData = "";
+        }
+        public RestClient(string endpoint)
+        {
+            EndPoint = endpoint;
+            Method = HttpVerb.GET;
+            ContentType = "text/xml";
+            PostData = "";
+        }
+        public RestClient(string endpoint, HttpVerb method)
+        {
+            EndPoint = endpoint;
+            Method = method;
+            ContentType = "text/xml";
+            PostData = "";
+        }
+
+        public RestClient(string endpoint, HttpVerb method, string postData)
+        {
+            EndPoint = endpoint;
+            Method = method;
+            ContentType = "text/xml";
+            PostData = postData;
+        }
+
+
+        public string MakeRequest()
+        {
+            return MakeRequest("");
+        }
+
+        public string MakeRequest(string parameters)
+        {
+            try {
+          //      String reqHdrJsonStr = "{" +
+          //"\"CDADocumentType\":1001," +
+          //"\"CDAProfile\":{" +
+          //          "\"ProfileType\":0," +
+          //          "\"VisitId\":[0]" +
+          //"}," +
+          //"\"Credentials\":{" +
+          //          "\"PrimeSuiteCredential\":{" +
+          //                   "\"PrimeSuiteSiteId\":\"APIDemo\"," +
+          //                    "\"PrimeSuiteUserAlias\":\"\"," +
+          //                    "\"PrimeSuiteUserName\":\"admin\"," +
+          //                    "\"PrimeSuiteUserPassword\":\"password\"" +
+          //          "}," +
+          //          "\"VendorCredential\":{" +
+          //                    "\"VendorLogin\":\"GeorgiaTechGUID\"," +
+          //                    "\"VendorPassword\":\"GeorgiaTechGUID\"" +
+          //          "}" +
+          //"}," +
+          //"\"Header\":{" +
+          //          "\"DestinationSiteID\":\"APIDemo\"," +
+          //          "\"PrimeSuiteUserID\":1," +
+          //          "\"SourceSiteID\":\"\"" +
+          //"}," +
+            
+          //  "\"PatientID\":\"1376\"}";
+          //      string doc = "The document sent to the patient chart";
+          //      String reqHdrJsonStr = "{" +
+          //"\"Base64Document\":\"" + doc + "\"," +
+          //          "\"Credentials\":{" +
+          //          "\"PrimeSuiteCredential\":{" +
+          //                   "\"PrimeSuiteSiteId\":\"APIDemo\"," +
+          //                    "\"PrimeSuiteUserAlias\":\"\"," +
+          //                    "\"PrimeSuiteUserName\":\"admin\"," +
+          //                    "\"PrimeSuiteUserPassword\":\"password\"" +
+          //          "}," +
+          //          "\"VendorCredential\":{" +
+          //                    "\"VendorLogin\":\"GeorgiaTechGUID\"," +
+          //                    "\"VendorPassword\":\"GeorgiaTechGUID\"" +
+          //          "}" +
+          //"}," + 
+
+          //"\"DocumentDescription\":\"Text Document\"," +
+
+          //  "\"DocumentFileType\":\"4\"," +
+
+          //  "\"DocumentName\":\"Gaurav's Document\"," +
+
+
+            
+          //  "\"DocumentSignerID\":\"1\"," +
+
+
+
+          //  "\"DocumentStatus\":\"1\"," +
+
+          //  "\"DocumentTypeID\":\"17\"," +
+
+          //  "\"FileCreateDate\":\"2014-03-27\"," +
+
+            
+          //"\"Header\":{" +
+          //          "\"DestinationSiteID\":\"APIDemo\"," +
+          //          "\"PrimeSuiteUserID\":1," +
+          //          "\"SourceSiteID\":\"\"" +
+          //"}," +
+
+          //  "\"PrimeSuitePatientId\":\"1376\"}";
+
+                string doc = "The document sent to the patient chart";
+                String reqHdrJsonStr = "{" +
+          "\"Base64Document\":\"" + doc + "\"," +
+                    "\"Credentials\":{" +
+                    "\"PrimeSuiteCredential\":{" +
+                             "\"PrimeSuiteSiteId\":\"APIDemo\"," +
+                              "\"PrimeSuiteUserAlias\":\"\"," +
+                              "\"PrimeSuiteUserName\":\"admin\"," +
+                              "\"PrimeSuiteUserPassword\":\"password\"" +
+                    "}," +
+                    "\"VendorCredential\":{" +
+                              "\"VendorLogin\":\"GeorgiaTechGUID\"," +
+                              "\"VendorPassword\":\"GeorgiaTechGUID\"" +
+                    "}" +
+          "}," +
+
+                   "\"Header\":{" +
+                    "\"DestinationSiteID\":\"APIDemo\"," +
+                    "\"PrimeSuiteUserID\":1," +
+                    "\"SourceSiteID\":\"\"" +
+          "}," +
+
+            "\"PrimeSuitePatientId\":\"1376\"}";
+                HttpWebRequest request = WebRequest.Create(EndPoint) as HttpWebRequest ;
+
+                request.Method = "POST";
+                request.ContentType = "text/json";
+
+                
+                    using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+                    {
+                        writer.Write(reqHdrJsonStr);
+                        writer.Flush();
+                        writer.Close();
+                    }
+
+                    string responseValue = string.Empty;
+
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    
+
+                    if (response.StatusCode != HttpStatusCode.OK)
+                    {
+                        var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
+                        throw new ApplicationException(message);
+                    }
+
+                    // grab the response
+                    using (var responseStream = response.GetResponseStream())
+                    {
+                        if (responseStream != null)
+                            using (var reader = new StreamReader(responseStream))
+                            {
+                                responseValue = reader.ReadToEnd();
+                            }
+                    }
+                    
+                    return responseValue;
+                }
+            }
+            catch(WebException ex)
+            {
+                string result = string.Format("Could not get data. {0}", ex);
+                Console.WriteLine(result);
+                throw;
+            }
+            
+        }
+
+    } // class
+
+}
+
+
+class Greenway
+{
+    public static void Main()
+    {
+        RestClient R = new RestClient();
+        R.MakeRequest();
+        string response = R.MakeRequest();
+        Console.WriteLine(response);
+        System.IO.File.WriteAllText(@"D:\response.json", response);
+        Console.ReadLine();
+
+    }
+
+}
