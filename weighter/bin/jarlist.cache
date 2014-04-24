@@ -1,0 +1,13 @@
+# cache for current jar dependency. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1392670156000 15279 61fce919969d134a4fa2ba4fd5bf151ea63fce13 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\android-sdk\libs\slf4j-api-1.4.2.jar
+1392670156000 15279 61fce919969d134a4fa2ba4fd5bf151ea63fce13 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\examples\weighter\libs\slf4j-api-1.4.2.jar
+1392670156000 46725 fd32786786e2adb664d5ecc965da47629dca14ba C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\examples\weighter\libs\commons-codec-1.3.jar
+1392670156000 46725 fd32786786e2adb664d5ecc965da47629dca14ba C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\android-sdk\libs\commons-codec-1.3.jar
+1392670156000 367444 03b254c872b95141751f414e353a25c2ac261b51 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\examples\weighter\libs\log4j-1.2.14.jar
+1392670156000 367444 03b254c872b95141751f414e353a25c2ac261b51 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\android-sdk\libs\log4j-1.2.14.jar
+1392670156000 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\examples\weighter\libs\android-support-v4.jar
+1392670156000 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\android-sdk\libs\android-support-v4.jar
+1392670156000 8620 74276af9ecf03f84d04ecf9c78a0d7bdf154c895 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\android-sdk\libs\slf4j-log4j12-1.4.2.jar
+1392670156000 8620 74276af9ecf03f84d04ecf9c78a0d7bdf154c895 C:\Users\zager\Desktop\health info\healthvault-sdk-1.5.0\R1.5.0\android\examples\weighter\libs\slf4j-log4j12-1.4.2.jar
